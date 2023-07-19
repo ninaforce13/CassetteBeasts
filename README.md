@@ -28,20 +28,22 @@ There's a lot of scripts here that will cover just about whatever you're trying 
 
 # Setting up our Sticker Properties
 7. Now that we've assigned our battle move script, the Inspector will change to show the available options we have for that specific battle move type. We'll cover some of these here, the rest you can experiment with as you get comfortable.
-![Divealsnewgroove tres file](https://github.com/ninaforce13/CassetteBeasts/assets/68625676/3dd0475f-59bf-4513-9578-b84cd245eb02)
+![Divealsnewgroove tres file](https://github.com/ninaforce13/CassetteBeasts/assets/68625676/3dd0475f-59bf-4513-9578-b84cd245eb02) ![image](https://github.com/ninaforce13/CassetteBeasts-StickerModdingGuide/assets/68625676/1e463281-1f38-4142-b5e0-5a87ed107796)
 
-   * **Name** - Pretty self explanatory, this is the Display Name for your move.
-   * **Category Name** - This is the category your move falls under: Melee, Ranged, Misc, Status *(this is just for display purposes, the actual set up for this is in other attributes)*
-   * **Description** - The description for what your move does
-   * **Tags** - This is how we determine who can use this sticker. There's a lot of tags and while you could make up your own tag, if you have a specific monster you want to target with this sticker then you should use the tags for that monster. In this case we will assign the ```diveal``` and ```unsellable``` tags to our sticker to ensure this move is exclusive to the Diveal family. You could also assign the ```any``` tag if you intend your move to be compatible with any monster.
+
+   * **Name**(required) - Pretty self explanatory, this is the Display Name for your move.
+   * **Category Name**(required) - This is the category your move falls under: Melee, Ranged, Misc, Status *(this is just for display purposes, the actual set up for this is in other attributes)*
+   * **Description**(required) - The description for what your move does
+   * **Tags**(required) - This is how we determine who can use this sticker. There's a lot of tags and while you could make up your own tag, if you have a specific monster you want to target with this sticker then you should use the tags for that monster. In this case we will assign the ```diveal``` and ```unsellable``` tags to our sticker to ensure this move is exclusive to the Diveal family. You could also assign the ```any``` tag if you intend your move to be compatible with any monster.
    * **Cost** - How much AP your move will use
    * **Power** - The base damage of your move. 
    * **Physicality** - This determines if your move is Melee or Ranged. 
    * **Target Type** - This determines who is affected by your move: One Enemy, All Enemies, One Ally, All Allies, Everyone, etc.
    * **Default Target** - This is where the game will initially focus the target when selecting the move in battle.
-   * **Elemental Types** - This determines the element used for the attack. You can find the existing elemental types in ```res://data/elemental_types/``` drag an elemental profile from there to assign to this attribute.
+   * **Elemental Types** - This determines the element used for the attack. You can find the existing elemental types in ```res://data/elemental_types/``` drag an elemental profile from there to assign to this attribute. Leaving it empty will assume it to be a typeless move that adjusts to the type of the user.
    * **Attack Vfx** - This is the visual effect shown when the monster uses this attack. This guide won't cover custom effects, but you can find the existing ones in ```res://data/attack_vfx/```. Just drag whichever one you want into this attribute.
    * **Hit Vfx** - This is the visual effect that shows on the monster being targeted by the move. You will find available effects in ```res://data/hit_vfx/```
+   * **Attribute Profile**(required) - This determines the available bonus stats that can be applied to this sticker during rarity upgrades. You will find them in ```res://data/sticker_attribute_profiles/```
    * **Target Status Effects** - If applicable, this is the status effect that your move will apply to targets. Usable status effects are found here ```res://data/status_effects/```. You could also write your own status effect scripts to be used, but we will not be covering that in this guide.
      * **Status Effects to Apply** - If you have more than one status effect assigned above, then you can use this to determine whether to apply them all or one at random *(like wonderful7)*
      * **Status Effect Amount** - You can adjust this number to be the number of turns the effect will be set for initially.
@@ -106,9 +108,7 @@ A lot of this guide is focused on making stickers that fit into the game's curre
 There are places in this guide where you can diverge to create something far more customized, such as the battle_move_script assignment. You might have an idea for something that is **similar** to an existing move behavior, but with minor tweaks. In these cases you could copy the script for that behavior into your mod folder to make the necessary adjustments and then assign that new script to your new ```sticker resource```. The same applies to the creation of new status effects which isn't covered here, but is perfectly doable as well if you're needing something different as existing status moves also have their own behavior scripts assigned to them that you could copy to modify to your needs in this scenario. 
 
 In regards to move tags, there's no one stop shop location for all of them. However, you can look at each monster form directly to see what move tags are applicable to that tape. This way you can be more specific with your sticker. 
-
-There's also the topic of what makes specific bonus attributes applicable to your sticker. The short of it is, each attribute has its own evaluation for whether or not it can be applied to your sticker based on the properties you set for your sticker. You can dig further into this by studying the scripts in the ```res://data/sticker_attribute_scripts/``` and looking at their specific implementatin of the ```is_applicable_to()``` function. 
-
+ 
 The code shown above for the metadata script is written in a way that should allow for multiple modders to follow this guide and not overwrite each other. You don't have to use it exactly as is, that is just the specific implementation that worked for my testing. As always code is flexible and specific to your own needs so feel free to experiment.
 
 When a mod like this is unloaded, the custom stickers will just dissappear. So it's perfectly safe to uninstall these kinds of mods since all that happens is they don't load in the stickers.
