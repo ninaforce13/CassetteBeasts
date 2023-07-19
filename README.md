@@ -28,6 +28,7 @@ There's a lot of scripts here that will cover just about whatever you're trying 
 
 # Setting up our Sticker Properties
 7. Now that we've assigned our battle move script, the Inspector will change to show the available options we have for that specific battle move type. We'll cover some of these here, the rest you can experiment with as you get comfortable.
+   
 ![Divealsnewgroove tres file](https://github.com/ninaforce13/CassetteBeasts/assets/68625676/3dd0475f-59bf-4513-9578-b84cd245eb02) ![image](https://github.com/ninaforce13/CassetteBeasts-StickerModdingGuide/assets/68625676/1e463281-1f38-4142-b5e0-5a87ed107796)
 
 
@@ -35,6 +36,7 @@ There's a lot of scripts here that will cover just about whatever you're trying 
    * **Category Name**(required) - This is the category your move falls under: Melee, Ranged, Misc, Status *(this is just for display purposes, the actual set up for this is in other attributes)*
    * **Description**(required) - The description for what your move does
    * **Tags**(required) - This is how we determine who can use this sticker. There's a lot of tags and while you could make up your own tag, if you have a specific monster you want to target with this sticker then you should use the tags for that monster. In this case we will assign the ```diveal``` and ```unsellable``` tags to our sticker to ensure this move is exclusive to the Diveal family. You could also assign the ```any``` tag if you intend your move to be compatible with any monster.
+   * **Attribute Profile**(required) - This determines the available bonus stats that can be applied to this sticker during rarity upgrades. You will find them in ```res://data/sticker_attribute_profiles/```
    * **Cost** - How much AP your move will use
    * **Power** - The base damage of your move. 
    * **Physicality** - This determines if your move is Melee or Ranged. 
@@ -43,7 +45,6 @@ There's a lot of scripts here that will cover just about whatever you're trying 
    * **Elemental Types** - This determines the element used for the attack. You can find the existing elemental types in ```res://data/elemental_types/``` drag an elemental profile from there to assign to this attribute. Leaving it empty will assume it to be a typeless move that adjusts to the type of the user.
    * **Attack Vfx** - This is the visual effect shown when the monster uses this attack. This guide won't cover custom effects, but you can find the existing ones in ```res://data/attack_vfx/```. Just drag whichever one you want into this attribute.
    * **Hit Vfx** - This is the visual effect that shows on the monster being targeted by the move. You will find available effects in ```res://data/hit_vfx/```
-   * **Attribute Profile**(required) - This determines the available bonus stats that can be applied to this sticker during rarity upgrades. You will find them in ```res://data/sticker_attribute_profiles/```
    * **Target Status Effects** - If applicable, this is the status effect that your move will apply to targets. Usable status effects are found here ```res://data/status_effects/```. You could also write your own status effect scripts to be used, but we will not be covering that in this guide.
      * **Status Effects to Apply** - If you have more than one status effect assigned above, then you can use this to determine whether to apply them all or one at random *(like wonderful7)*
      * **Status Effect Amount** - You can adjust this number to be the number of turns the effect will be set for initially.
