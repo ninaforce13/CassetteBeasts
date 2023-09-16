@@ -54,7 +54,7 @@ There's a lot of scripts here that will cover just about whatever you're trying 
 8. Now that we've set up our new sticker, we need to get it into the move pool where we can access it in the game. Let's go back to our ```StickerMod``` folder and right click to create a ```New Script```. You can name it what you want, but we'll just call it ```load_sticker_mod```. This is the script we will use to manage loading our mod and seeding the new sticker into the move pool.
 9. Feel free to copy the code below for this load_sticker_mod or edit it to suit your specific needs. I've left comments in the code to explain what's going on if you want to make adjustments. 
 ```
-# We're extending ContentInfo because that is what we use to provide the metadata for our mod to the Game's mod loader.
+# ContentInfo is what we use to provide the metadata for our mod to the Game's mod loader.
 extends ContentInfo
 
 #This is where we load our sticker to be added into the movepool below. 
@@ -63,6 +63,9 @@ extends ContentInfo
 var sticker1 = preload("res://mods/StickerMod/DivealsNewGroove.tres")
 
 func _init():
+# Waits for the by_id table to load before adding the new move.
+	while BattleMoves.by_id.size() == 0:
+		yield(Co.wait(5),"completed")   
 #  A call to our function for seeding the sticker. Call this once per each sticker you are adding.
 	add_sticker(sticker1)
 #	We're done! This is just so we know our mod loaded.
@@ -70,6 +73,8 @@ func _init():
 
 # This function is how we will seed the sticker into the movepool.
 func add_sticker(sticker):
+# Replace "stickernamehere" with a unique name for your sticker to make it usable with the debug console
+	BattleMoves.by_id["stickernamehere"] = sticker
 #	The primary sticker bucket. This will get used in certain Loot Tables, The Be Random attack, and part of AlephNull's movepool script.
 	BattleMoves.all_stickers.append(sticker)
 #	This is the important bit, here we added our sticker into the move pool by the tags we used. This way anyone that matches them will be able to learn them.
@@ -87,7 +92,8 @@ func add_sticker(sticker):
 			BattleMoves.sellable_stickers.push_back(sticker)	
 			if not BattleMoves.sellable_stickers_by_tag.has(tag):
 				BattleMoves.sellable_stickers_by_tag[tag] = []
-			BattleMoves.sellable_stickers_by_tag[tag].push_back	
+			BattleMoves.sellable_stickers_by_tag[tag].push_back(sticker)
+
 
 ```
 
